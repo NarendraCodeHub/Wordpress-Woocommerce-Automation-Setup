@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.io.FileHandler;
 
 public class Photo {
+	//For Capture Photo if TestScript Fail 
 	public static void capture(WebDriver driver) throws Exception{
 	 Date d = new Date();
 	 String s = d.toString();

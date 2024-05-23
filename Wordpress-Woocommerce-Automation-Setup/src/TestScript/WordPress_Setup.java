@@ -1,9 +1,5 @@
 package TestScript;
 
-import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
-import org.testng.annotations.Test;
-import org.testng.AssertJUnit;
 import java.io.File;
 
 import org.openqa.selenium.Alert;
@@ -20,23 +16,23 @@ import org.testng.annotations.Test;
 import Constant.Launch;
 
 public class WordPress_Setup  extends Launch {
-	@Test(priority = 0)
-	void WordPress_Woo_Setup() throws Exception {
+	@Test
+	void WordPress_Woo_Setup() throws Exception{
 		
 		//Select Language
 		WebElement dd = driver.findElement(By.xpath("//select"));
 		Select lang = new Select(dd);
 		lang.selectByVisibleText("English (United States)");
 		driver.findElement(By.xpath("//input[@id='language-continue']")).click();
-//	    driver.findElement(By.xpath("//a[.='Let’s go!']")).click();
-//		String Database_Name = Launch.Database_Name;
-//		driver.findElement(By.xpath("//input[@id='dbname']")).sendKeys(Database_Name);
-//		String Database_UserName = Launch.Database_UserName;
-//		driver.findElement(By.xpath("//input[@id='uname']")).sendKeys(Database_UserName);
-//		String Database_Password = Launch.Database_Password;
-//    	driver.findElement(By.xpath("//input[@id='pwd']")).sendKeys(Database_Password);
-//		driver.findElement(By.xpath("//input[@name='submit']")).click();
-//		driver.findElement(By.xpath("//a[.='Run the installation']")).click();
+	    driver.findElement(By.xpath("//a[.='Let’s go!']")).click();
+		String Database_Name = Launch.Database_Name;
+		driver.findElement(By.xpath("//input[@id='dbname']")).sendKeys(Database_Name);
+		String Database_UserName = Launch.Database_UserName;
+		driver.findElement(By.xpath("//input[@id='uname']")).sendKeys(Database_UserName);
+		String Database_Password = Launch.Database_Password;
+    	driver.findElement(By.xpath("//input[@id='pwd']")).sendKeys(Database_Password);
+		driver.findElement(By.xpath("//input[@name='submit']")).click();
+		driver.findElement(By.xpath("//a[.='Run the installation']")).click();
 		String Site_Title = Launch.Site_Title;
     	driver.findElement(By.xpath("//input[@id='weblog_title']")).sendKeys(Site_Title);
 		String Instance_UserName = Launch.Instance_UserName;
@@ -59,32 +55,32 @@ public class WordPress_Setup  extends Launch {
 		
 		//Uninstall Previous Plugin & Install New Plugin
 		driver.findElement(By.xpath("//a[@href='plugins.php']")).click();
-//		driver.findElement(By.xpath("//input[@id='cb-select-all-1']")).click();
-//		WebElement bulk_option = driver.findElement(By.xpath("//select[@id='bulk-action-selector-top']"));
-//		Select plugin_bulk_opt = new Select(bulk_option);
-//		plugin_bulk_opt.selectByVisibleText("Delete");
-//		driver.findElement(By.xpath("//input[@id='doaction']")).click();
-//		try {
-//		    Alert popup = driver.switchTo().alert();
-//		    popup.accept();
-//		} catch (NoAlertPresentException e) {
-//		    // No alert present, continue with the next steps
-//		}
+		driver.findElement(By.xpath("//input[@id='cb-select-all-1']")).click();
+		WebElement bulk_option = driver.findElement(By.xpath("//select[@id='bulk-action-selector-top']"));
+		Select plugin_bulk_opt = new Select(bulk_option);
+		plugin_bulk_opt.selectByVisibleText("Delete");
+		driver.findElement(By.xpath("//input[@id='doaction']")).click();
+		try {
+		    Alert popup = driver.switchTo().alert();
+		    popup.accept();
+		} catch (NoAlertPresentException e) {
+		    // No alert present, continue with the next steps
+		}
 		WebDriverWait wait = new WebDriverWait(driver, 300); 
-		//wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//td[.='No plugins are currently available.']"), "No plugins are currently available."));
+		wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//td[.='No plugins are currently available.']"), "No plugins are currently available."));
 		driver.findElement(By.xpath("//a[.='Add New Plugin']")).click();
 		
 		//Install WP Mail Logging
 		driver.findElement(By.xpath("//input[@id='search-plugins']")).sendKeys("WP Mail Logging");
-		driver.findElement(By.xpath("//a[@data-slug='wp-mail-logging']")).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@data-slug='wp-mail-logging']"))).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@aria-label='Activate WP Mail Logging' and @data-slug='wp-mail-logging']"))).click();
-		driver.findElement(By.xpath("//a[.='Active']")).click();
+		
 		//Install WooCommerce and Setup
 		driver.findElement(By.xpath("//a[.='Add New Plugin']")).click();
 		driver.findElement(By.xpath("//input[@id='search-plugins']")).sendKeys("Woocommerce");
-		driver.findElement(By.xpath("//a[@data-slug='woocommerce']")).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@data-slug='woocommerce']"))).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@aria-label='Activate WooCommerce' and @data-slug='woocommerce']"))).click();
-		driver.findElement(By.xpath("//a[.='Active']")).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[.='Active']"))).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[@class='components-button woocommerce-profiler-navigation-skip-link is-link']"))).click();
 		Actions act = new Actions(driver);
 		WebElement select_country = driver.findElement(By.xpath("//div[@class='components-base-control__field']"));
@@ -98,7 +94,7 @@ public class WordPress_Setup  extends Launch {
 		driver.findElement(By.xpath("//button[.='Go to my store']")).click();
 		
 		//Configure Product 
-		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//button[.='Add products']"))).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[.='Add your products']"))).click();
 		driver.findElement(By.xpath("//a[.='Import your products from a CSV file']")).click();
 		
 		//Import Product
@@ -132,7 +128,7 @@ public class WordPress_Setup  extends Launch {
 		WebElement msg=driver.findElement(By.xpath("//div[@class='updated inline']"));
         String text=msg.getText();
         String expectedText = "Your settings have been saved.";
-        AssertJUnit.assertEquals(text,expectedText);
+        Assert.assertEquals(text,expectedText);
         
         //configure Tax
         driver.findElement(By.xpath("//a[.='Tax']")).click();
@@ -156,13 +152,13 @@ public class WordPress_Setup  extends Launch {
 		checkPayments.click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//span[@class='woocommerce-input-toggle woocommerce-input-toggle--enabled']")));
 		driver.findElement(By.xpath("//button[.='Save changes']")).click();
-		AssertJUnit.assertEquals(text,expectedText);
+		Assert.assertEquals(text,expectedText);
 		
         //Configure Account & Privacy 
         driver.findElement(By.xpath("//a[.='Accounts & Privacy']")).click();
         driver.findElement(By.xpath("//input[@id='woocommerce_enable_myaccount_registration']")).click();
         driver.findElement(By.xpath("//button[.='Save changes']")).click();
-        AssertJUnit.assertEquals(text,expectedText);
+        Assert.assertEquals(text,expectedText);
         
       //Create Users
         driver.findElement(By.xpath("//div[.='Users']")).click();
@@ -192,18 +188,13 @@ public class WordPress_Setup  extends Launch {
     	Actions user_logout = new Actions(driver);
     	WebElement user = driver.findElement(By.xpath("//a[contains(.,'Howdy')]"));
     	user_logout.moveToElement(wait.until(ExpectedConditions.elementToBeClickable(user))).perform();
-    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[.='Log Out']"))).click();		
-	}
-	
-	@Test(priority = 1)
-    void woo_placeAorder()throws Exception {
-	
-	    //Login as User
-	    driver.findElement(By.xpath("//a[.='My account']")).click();
-		driver.findElement(By.xpath("//input[@id='username']")).sendKeys("billdoe");
-		driver.findElement(By.xpath("//input[@id='password']")).sendKeys("billdoe");
-		driver.findElement(By.xpath("//button[.='Log in']")).click();
-			
+    	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[.='Log Out']"))).click();	
+		
+		//Login as User
+		driver.findElement(By.xpath("//input[@id='user_login']")).sendKeys("billdoe");
+		driver.findElement(By.xpath("//input[@id='user_pass']")).sendKeys("billdoe");
+		driver.findElement(By.xpath("//input[@id='wp-submit']")).click();
+		
 		//Place a order
 		driver.findElement(By.xpath("//a[.='Shop']")).click();
 		driver.findElement(By.xpath("//h2[.='Beanie']")).click();
@@ -219,5 +210,4 @@ public class WordPress_Setup  extends Launch {
 		driver.findElement(By.xpath("//a[.='My account']")).click();
 		driver.findElement(By.xpath("//a[.='Log out']")).click();
 	}
-
 }

@@ -35,17 +35,12 @@ public class Launch implements Framework_Constants {
 		driver.quit();
 	}
 	
-//	public static void waitForPageLoad(WebDriver driver, int timeoutInSeconds) {
-//        WebDriverWait wait = new WebDriverWait(driver, timeoutInSeconds);
-//        wait.until((ExpectedCondition<Boolean>) webDriver ->
-//                ((JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
-//	}
-	
 	 public void get(String url) {
 	        driver.get(url);
 	        waitForPageLoad();
 	    }
 
+	 	// For Page Loading
 	    public void waitForPageLoad() {
 	        WebDriverWait wait = new WebDriverWait(driver, 200);
 	        wait.until((ExpectedCondition<Boolean>) webDriver ->
