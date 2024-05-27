@@ -207,6 +207,7 @@ public class WordPress_Setup  extends Launch {
 		driver.findElement(By.xpath("//input[@id='billing-city']")).sendKeys("Noida");
 		driver.findElement(By.xpath("//input[@id='billing-postcode']")).sendKeys("201301");
 		driver.findElement(By.xpath("//span[.='Place Order']")).click();
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[.='Order received']")));
 		driver.findElement(By.xpath("//a[.='My account']")).click();
 		driver.findElement(By.xpath("//a[.='Log out']")).click();
 	}
