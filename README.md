@@ -62,4 +62,4 @@ The test scripts will execute, automating various actions on your WooCommerce si
 
 ## License
 
-This project is licensed under the MIT License. See the `LICENSE` file for more details.
+This project is licensed under the EPL-2.0 License. See the `LICENSE` file for more details.
