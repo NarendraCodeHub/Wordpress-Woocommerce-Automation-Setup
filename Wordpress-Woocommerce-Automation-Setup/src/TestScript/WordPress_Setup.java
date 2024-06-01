@@ -77,7 +77,7 @@ public class WordPress_Setup  extends Launch {
 		
 		//Install WooCommerce and Setup
 		driver.findElement(By.xpath("//a[.='Add New Plugin']")).click();
-		driver.findElement(By.xpath("//input[@id='search-plugins']")).sendKeys("Woocommerce");
+		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='search-plugins']"))).sendKeys("Woocommerce");
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@data-slug='woocommerce']"))).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[@aria-label='Activate WooCommerce' and @data-slug='woocommerce']"))).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//a[.='Active']"))).click();
@@ -206,6 +206,7 @@ public class WordPress_Setup  extends Launch {
 		driver.findElement(By.xpath("//input[@id='billing-address_1']")).sendKeys("Noida");
 		driver.findElement(By.xpath("//input[@id='billing-city']")).sendKeys("Noida");
 		driver.findElement(By.xpath("//input[@id='billing-postcode']")).sendKeys("201301");
+		Thread.sleep(1000);
 		driver.findElement(By.xpath("//span[.='Place Order']")).click();
 		wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//h1[.='Order received']")));
 		driver.findElement(By.xpath("//a[.='My account']")).click();
